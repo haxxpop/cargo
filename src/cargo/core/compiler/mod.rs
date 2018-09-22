@@ -917,7 +917,7 @@ fn build_deps_args<'a, 'cfg>(
 ) -> CargoResult<()> {
     let bcx = cx.bcx;
     cmd.arg("-L").arg(&{
-        let mut deps = OsString::from("dependency=");
+        let mut deps = OsString::new();
         deps.push(cx.files().deps_dir(unit));
         deps
     });
@@ -926,7 +926,7 @@ fn build_deps_args<'a, 'cfg>(
     // dependencies are correctly found (for reexported macros).
     if let Kind::Target = unit.kind {
         cmd.arg("-L").arg(&{
-            let mut deps = OsString::from("dependency=");
+            let mut deps = OsString::new();
             deps.push(cx.files().host_deps());
             deps
         });
